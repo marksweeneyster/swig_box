@@ -12,7 +12,6 @@
 
 
 %include "FuInterface.hpp"
-%include <memory>
 
 %newobject fubar::FuFactory::MakeFuTypeOne();
 %newobject fubar::FuFactory::MakeFuTypeTwo();

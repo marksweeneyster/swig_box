@@ -1,7 +1,7 @@
 # swig_box
 sandbox for swig work
 
-Currently CMakeLists has harcoded paths for swig on my win machine.
+Currently, CMakeLists has harcoded paths for swig on my win machine.
 
 I tested the polymorphic behavior of the FubarFactory in python. The **TypeTwo** version performs an "add" by taking the product.
 
