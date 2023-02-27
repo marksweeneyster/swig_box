@@ -3,9 +3,17 @@
 #include <memory>
 
 namespace fubar {
+
+    enum class FuErr {
+        None = 0,
+        Unknown
+    };
+
     class IFu {
     public:
         virtual double add(double a, double b) = 0;
+
+        virtual FuErr getErr() const = 0;
 
         virtual ~IFu() { };
     };

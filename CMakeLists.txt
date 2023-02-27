@@ -10,7 +10,7 @@ find_package(SWIG 4.1
         COMPONENTS python)
 
 if(SWIG_FOUND)
-    message("SWIG found: ${SWIG_EXECUTABLE}")
+    message(STATUS "SWIG found: ${SWIG_EXECUTABLE}")
     if(NOT SWIG_python_FOUND)
         message(WARNING "SWIG Python bindings cannot be generated")
     endif()
