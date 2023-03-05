@@ -15,7 +15,7 @@ namespace fubar {
 
         virtual FuErr getErr() const = 0;
 
-        virtual ~IFu() { };
+        virtual ~IFu() = default;
     };
 
     using FuPtr = std::unique_ptr<IFu>;
@@ -24,6 +24,7 @@ namespace fubar {
     public:
         static FuPtr MakeFuTypeOne();
         static FuPtr MakeFuTypeTwo();
+        static FuPtr MakeFuNoop();
     };
 
 }

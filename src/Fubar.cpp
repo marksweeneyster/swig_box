@@ -1,9 +1,9 @@
 #include "FuInterface.hpp"
 
 namespace fubar {
-    class FubarImpl : public IFu {
+    class FubarOne : public IFu {
     public:
-        FubarImpl() : err(FuErr::None) {}
+      FubarOne() : err(FuErr::None) {}
 
         double add(double a, double b) override {
             return a+b;
@@ -14,9 +14,9 @@ namespace fubar {
         FuErr err;
     };
 
-    class FubarProdImpl : public IFu {
+    class FubarTwo : public IFu {
     public:
-        FubarProdImpl() : err(FuErr::Unknown) {}
+        FubarTwo() : err(FuErr::Unknown) {}
 
         double add(double a, double b) override {
             return a*b;
@@ -27,11 +27,23 @@ namespace fubar {
         FuErr err;
     };
 
+    class FubarNoop : public IFu {
+    public:
+      double add(double a, double b) override {
+        return 0.0;
+      }
+
+      FuErr getErr() const override {return FuErr::None;}
+    };
+
     FuPtr FuFactory::MakeFuTypeOne() {
-        return std::make_unique<FubarImpl>();
+        return std::make_unique<FubarOne>();
     }
     FuPtr FuFactory::MakeFuTypeTwo() {
-        return std::make_unique<FubarProdImpl>();
+        return std::make_unique<FubarTwo>();
     }
 
+    FuPtr FuFactory::MakeFuNoop() {
+      return std::make_unique<FubarNoop>();
+    }
 }

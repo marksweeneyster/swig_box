@@ -12,5 +12,9 @@ int main() {
 
     std::cout << " foo test2: " << fubar->add(2.14,3.98) << std::endl;
 
+    fubar = fubar::FuFactory::MakeFuNoop();
+
+    std::cout << " foo test noop: " << fubar->add(2.14,3.98) << std::endl;
+
     return 0;
 }
