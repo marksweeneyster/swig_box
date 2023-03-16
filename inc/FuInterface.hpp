@@ -1,5 +1,6 @@
 #ifndef SWIG_BOX_FUINTERFACE_HPP
 #define SWIG_BOX_FUINTERFACE_HPP
+#include <iostream>
 #include <memory>
 
 namespace fubar {
@@ -9,9 +10,11 @@ namespace fubar {
         Unknown
     };
 
+    std::ostream& operator<<(std::ostream& os, const FuErr& err);
+
     class IFu {
     public:
-        virtual double add(double a, double b) = 0;
+        virtual constexpr double add(double a, double b) = 0;
 
         virtual FuErr getErr() const = 0;
 

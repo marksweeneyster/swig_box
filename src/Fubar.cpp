@@ -1,11 +1,24 @@
 #include "FuInterface.hpp"
 
 namespace fubar {
+
+    std::ostream& operator<<(std::ostream& os, const FuErr& err) {
+        switch(err) {
+            case FuErr::None:
+                os << "None";
+                break;
+            case FuErr::Unknown:
+            default:
+                os << "Unknown";
+        }
+        return os;
+    }
+
     class FubarOne : public IFu {
     public:
-      FubarOne() : err(FuErr::None) {}
+        constexpr FubarOne() : err(FuErr::None) {}
 
-        double add(double a, double b) override {
+        constexpr double add(double a, double b) override {
             return a+b;
         }
 
@@ -16,9 +29,9 @@ namespace fubar {
 
     class FubarTwo : public IFu {
     public:
-        FubarTwo() : err(FuErr::Unknown) {}
+        constexpr FubarTwo() : err(FuErr::Unknown) {}
 
-        double add(double a, double b) override {
+        constexpr double add(double a, double b) override {
             return a*b;
         }
 
@@ -29,11 +42,11 @@ namespace fubar {
 
     class FubarNoop : public IFu {
     public:
-      double add(double a, double b) override {
-        return 0.0;
-      }
+        constexpr double add(double a, double b) override {
+            return 0.0;
+        }
 
-      FuErr getErr() const override {return FuErr::None;}
+        FuErr getErr() const override {return FuErr::None;}
     };
 
     FuPtr FuFactory::MakeFuTypeOne() {

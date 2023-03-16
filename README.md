@@ -1,7 +1,14 @@
 # swig_box
 sandbox for swig work
 
-Currently, CMakeLists has harcoded paths for swig on my win machine.
+For cmake invocation add a parameter for the SWIG executable path
+``` console
+#windows example
+cmake .. -DSWIG_EXECUTABLE=C:/tools/swig/swigwin-4.1.1/swig <other possible params>
+
+#linux example
+cmake .. -DSWIG_EXECUTABLE=/home/mark/Dev/tools/swig/install/bin/swig <other possible params>
+```
 
 I tested the polymorphic behavior of the FubarFactory in python. The **TypeTwo** version performs an "add" by taking the product.
 

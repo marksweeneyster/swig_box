@@ -3,29 +3,36 @@ project(swig_box)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SWIG_EXECUTABLE C:/tools/swig/swigwin-4.1.1/swig)
-set(SWIG_DIR C:/tools/swig/swigwin-4.1.1/Lib)
+message(STATUS "SWIG executable: ${SWIG_EXECUTABLE}")
 
 find_package(SWIG 4.1
         COMPONENTS python)
 
 if(SWIG_FOUND)
-    message(STATUS "SWIG found: ${SWIG_EXECUTABLE}")
     if(NOT SWIG_python_FOUND)
         message(WARNING "SWIG Python bindings cannot be generated")
     endif()
+else()
+    message(WARNING "SWIG NOT found")
 endif()
 
 include(UseSWIG)
 
 find_package(PythonLibs)
 
+find_package(ZeroMQ CONFIG REQUIRED)
+
+find_package(fmt CONFIG REQUIRED)
+
 add_library(fubar src/Fubar.cpp)
 target_include_directories(fubar PUBLIC inc)
 
+#target_link_libraries(fubar PRIVATE libzmq libzmq-static)
+
 add_executable(swig_box main.cpp)
 target_include_directories(swig_box PUBLIC inc)
-target_link_libraries(swig_box PUBLIC fubar)
+target_link_libraries(swig_box PUBLIC fubar fmt::fmt)
+
 
 set_property(SOURCE inc/fubar.i PROPERTY CPLUSPLUS ON)
 
@@ -39,3 +46,10 @@ target_include_directories(pyfubar
         ${PYTHON_INCLUDE_DIR}
         )
 
+include(FetchContent)
+FetchContent_Declare(googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG 64e0945546ec8c331af27ebffcca44a4006e9e35  # release v1.13.x
+        )
+
+FetchContent_MakeAvailable(googletest)
