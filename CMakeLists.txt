@@ -20,18 +20,14 @@ include(UseSWIG)
 
 find_package(PythonLibs)
 
-find_package(ZeroMQ CONFIG REQUIRED)
-
 find_package(fmt CONFIG REQUIRED)
 
 add_library(fubar src/Fubar.cpp)
 target_include_directories(fubar PUBLIC inc)
 
-#target_link_libraries(fubar PRIVATE libzmq libzmq-static)
-
 add_executable(swig_box main.cpp)
 target_include_directories(swig_box PUBLIC inc)
-target_link_libraries(swig_box PUBLIC fubar fmt::fmt)
+target_link_libraries(swig_box PUBLIC fubar fmt::fmt-header-only)
 
 
 set_property(SOURCE inc/fubar.i PROPERTY CPLUSPLUS ON)
