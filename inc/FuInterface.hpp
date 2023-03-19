@@ -14,7 +14,7 @@ namespace fubar {
 
     class IFu {
     public:
-        virtual constexpr double add(double a, double b) = 0;
+        virtual double add(double a, double b) = 0;
 
         virtual FuErr getErr() const = 0;
 
