@@ -42,6 +42,12 @@ target_include_directories(pyfubar
         ${PYTHON_INCLUDE_DIR}
         )
 
+find_package(benchmark REQUIRED)
+
+add_executable(fubar_benchmark fubar_benchmark.cpp)
+
+target_link_libraries(fubar_benchmark PUBLIC benchmark::benchmark fubar)
+
 include(FetchContent)
 FetchContent_Declare(googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
