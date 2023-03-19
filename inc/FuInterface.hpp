@@ -1,5 +1,6 @@
 #ifndef SWIG_BOX_FUINTERFACE_HPP
 #define SWIG_BOX_FUINTERFACE_HPP
+#include <iostream>
 #include <memory>
 
 namespace fubar {
@@ -8,6 +9,8 @@ namespace fubar {
         None = 0,
         Unknown
     };
+
+    std::ostream& operator<<(std::ostream& os, const FuErr& err);
 
     class IFu {
     public:
