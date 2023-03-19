@@ -10,8 +10,8 @@
 #include "FuInterface.hpp"
 %}
 
-
 %include "FuInterface.hpp"
 
 %newobject fubar::FuFactory::MakeFuTypeOne();
 %newobject fubar::FuFactory::MakeFuTypeTwo();
+%newobject fubar::FuFactory::MakeFuNoop();
