@@ -18,12 +18,19 @@ endif()
 
 include(UseSWIG)
 
-find_package(PythonLibs)
+find_package (Python3 COMPONENTS Interpreter Development)
+MESSAGE(STATUS "EXECUTABLE     : " ${Python3_EXECUTABLE})
+MESSAGE(STATUS "INCLUDE        : " ${Python3_INCLUDE_DIRS})
+MESSAGE(STATUS "LIBRARIES      : " ${Python3_LIBRARIES})
+
 
 find_package(fmt CONFIG REQUIRED)
 
 add_library(fubar src/Fubar.cpp)
 target_include_directories(fubar PUBLIC inc)
+set_property(TARGET fubar PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+#####################
 
 add_executable(swig_box main.cpp)
 target_include_directories(swig_box PUBLIC inc)
@@ -36,10 +43,10 @@ set_property(SOURCE inc/fubar.i PROPERTY CPLUSPLUS ON)
 #set_property(SOURCE inc/fubar.i PROPERTY USE_TARGET_INCLUDE_DIRECTORIES TRUE)
 
 swig_add_library(pyfubar LANGUAGE python SOURCES inc/fubar.i)
-target_link_libraries(pyfubar PUBLIC ${PYTHON_LIBRARIES} fubar)
+target_link_libraries(pyfubar PUBLIC ${Python3_LIBRARIES} fubar)
 target_include_directories(pyfubar
         PUBLIC
-        ${PYTHON_INCLUDE_DIR}
+        ${Python3_INCLUDE_DIRS}
         )
 
 find_package(benchmark REQUIRED)

@@ -6,8 +6,9 @@
 namespace fubar {
 
     enum class FuErr {
-        None = 0,
-        Unknown
+      NoErr = 0,
+      Oops,
+      Unknown
     };
 
     std::ostream& operator<<(std::ostream& os, const FuErr& err);

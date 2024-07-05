@@ -4,8 +4,11 @@ namespace fubar {
 
     std::ostream& operator<<(std::ostream& os, const FuErr& err) {
         switch(err) {
-            case FuErr::None:
-                os << "None";
+            case FuErr::NoErr:
+              os << "No error";
+              break;
+            case FuErr::Oops:
+                os << "oops";
                 break;
             case FuErr::Unknown:
             default:
@@ -16,7 +19,7 @@ namespace fubar {
 
     class FubarOne : public IFu {
     public:
-        constexpr FubarOne() : err(FuErr::None) {}
+        constexpr FubarOne() : err(FuErr::NoErr) {}
 
         constexpr double add(double a, double b) override {
             return a+b;
@@ -29,7 +32,7 @@ namespace fubar {
 
     class FubarTwo : public IFu {
     public:
-        constexpr FubarTwo() : err(FuErr::Unknown) {}
+        constexpr FubarTwo() : err(FuErr::Oops) {}
 
         constexpr double add(double a, double b) override {
             return a*b;
@@ -46,7 +49,7 @@ namespace fubar {
             return 0.0;
         }
 
-        FuErr getErr() const override {return FuErr::None;}
+        FuErr getErr() const override {return FuErr::Unknown;}
     };
 
     FuPtr FuFactory::MakeFuTypeOne() {
